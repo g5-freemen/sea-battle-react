@@ -11,7 +11,7 @@ export default function Battlefield() {
     const { playerBF } = useContext(BattlefieldContext);
 
 
-    useEffect(() => console.log(playerBF),[playerBF]);
+    useEffect(() => console.log('playerBF=',playerBF),[playerBF]);
 
     return (
         <div className='container'>
@@ -19,7 +19,8 @@ export default function Battlefield() {
                 <DrawIdx type='digits'/>
                 <DrawIdx type='letters'/>
                 <div className='battlefield-pad'>
-                    { playerBF.flat().map(el=> <span className={el && 'shipEl'} key={uuid()}>{el!==null ? 'S': '.'}</span>) }
+                    { playerBF.length === 10 &&
+                    playerBF.flat().map(el=> <span className={el!==+el ? 'empty' : 'shipEl'} key={uuid()}>{el===+el ? +el: '.'}</span>) }
                 </div>
             </div>
 

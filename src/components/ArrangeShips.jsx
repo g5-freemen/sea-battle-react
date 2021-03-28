@@ -39,7 +39,7 @@ export default function ArrangeShips() {
             { arrangeShipsMode==='manual' &&
                 <div className='battlefield-menu--ships'>
                     { playerShips.map(ship =>
-                        <Ship key={uuid()} length={ship.length} num={ship.num} /> ) }
+                        <Ship key={uuid()} length={ship.length} num={ship.num} setPlayerShips={setPlayerShips}/> ) }
                 </div>
             }
                         

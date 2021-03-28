@@ -5,8 +5,8 @@ const Provider = BattlefieldContext.Provider;
 
 export default function ContextApp ({ children }) {
     const [ arrangeShips, setArrangeShips ] = useState(true);
-    const [ playerBF, setPlayerBF ] = useState(Array(10).fill(null).map(() => Array(10).fill(null)));
-    const [ compBF, setCompBF ] = useState(Array(10).fill(null).map(() => Array(10).fill(null)));
+    const [ playerBF, setPlayerBF ] = useState(Array(10).fill('-').map(() => Array(10).fill('-')));
+    const [ compBF, setCompBF ] = useState(Array(10).fill('-').map(() => Array(10).fill('-')));
     const [ bfCoord, setBFcoord ] = useState({});
 
     function getBFcoord() {

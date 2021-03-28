@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import { BattlefieldContext } from "./BattlefieldContext";
 import uuid from 'react-uuid';
 
-export default function Ship({length, num}) {
+export default function Ship({length, num, setPlayerShips}) {
   const { bfCoord, playerBF, setPlayerBF } = useContext(BattlefieldContext);
 
   function handleShipDrag(e) {
@@ -12,7 +12,7 @@ export default function Ship({length, num}) {
       let shiftY = e.pageY - coords.top;
     
       trg.style.position = 'absolute';
-      trg.style.zIndex = 9;
+      // trg.style.zIndex = 9;
 
       moveAt(e);
     
@@ -25,7 +25,6 @@ export default function Ship({length, num}) {
 
       trg.onmouseup = function(e) {
         let ship = e.target.closest('.ship').getBoundingClientRect();
-        let shipObj = e.target.closest('.ship');
         let shipCol = 0;
         let shipRow = 0;
         let shipX = 0;
@@ -41,19 +40,20 @@ export default function Ship({length, num}) {
         
         let putOk = true;
         for(let i=0; i<length; i++) {
-          if (playerBF[shipRow-1][shipCol-1+i] !== null) putOk = false; 
+          if (playerBF[shipRow-1][shipCol-1+i] !== '-') putOk = false; 
         }
 
         if (putOk) {
           console.log(shipX,'xxx',shipY);
+          let newBF = [...playerBF];
 
-          for(let i=0; i<length; i++)
-            playerBF[shipRow-1][shipCol-1+i] = num; 
+          for(let i=0; i<length; i++) {
+            setPlayerBF(newBF[shipRow-1][shipCol-1+i] = num);
+            // playerBF[shipRow-1][shipCol-1+i] = num;
+          }
 
-          setPlayerBF(playerBF);
-          shipObj.style.display = 'none';
-          // shipObj.style.top = shipY + 'px';
-          // shipObj.style.left = shipX + 'px';
+          setPlayerBF([newBF]);
+          setPlayerShips(prev => prev.filter(el=> el.num!==num))
         }
         
         if (!putOk) console.log('NOOOOOO')
