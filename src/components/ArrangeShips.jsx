@@ -1,48 +1,57 @@
-import React, {useState} from 'react';
+import React, {useEffect, useContext} from 'react';
+import { BattlefieldContext } from "./BattlefieldContext";
 import uuid from 'react-uuid';
 import Ship from './Ship';
 
 export default function ArrangeShips() {
-    const [ arrangeShipsMode, setArrangeShipsMode ] = useState(null);
-    const [ playerShips, setPlayerShips ] = useState([]);
-    const SHIPS_DATA = [ [1, 4], [2, 3], [3, 2], [4, 1] ];
+    const { playerShips, arrangeShipsMode, setArrangeShipsMode, setArrangeShips } = useContext(BattlefieldContext);
 
-    function createShips(data) {
-        let n=1;
-        for (let item of data) 
-            for (let i=0; i<item[0]; i++) {
-                let ship = { num: n++, length: item[1] }
-                setPlayerShips(prev=>prev.concat(ship));
-            }
+    function handleKeyboard(ev) {
+        if (ev.key==='1') setArrangeShipsMode('manual')
+        else if (ev.key==='2') setArrangeShipsMode('auto');
     }
 
-    function handleGameMode(mode) {
-        setArrangeShipsMode(mode);
-        createShips(SHIPS_DATA);
-    }
+    document.addEventListener('keydown',handleKeyboard);
+
+    useEffect( () => {
+        if (playerShips && playerShips.length===0)
+            setArrangeShipsMode('playerReady');
+    } , [playerShips]);
+
+    useEffect( () => {
+        if (arrangeShipsMode==='playerReady') setArrangeShips(false);
+    }, [arrangeShipsMode] )
 
     return (
         <div className='battlefield-menu'>
-            <p>
-                Расстановка кораблей
+
+            { (arrangeShipsMode==='begin' || arrangeShipsMode==='manual' || arrangeShipsMode==='auto') &&
+             <p className='battlefield-menu--title'>Расстановка кораблей
                 {arrangeShipsMode === 'manual' && <span>: вручную</span>}
                 {arrangeShipsMode === 'auto' && <span>: авто</span>}
-            </p>
+            </p> }
 
-            { !arrangeShipsMode &&
+            {arrangeShipsMode === 'manual' &&
+                <span className='battlefield-menu--remark'>
+                    Кликните на корабль левой кнопкой мыши чтобы выбрать его<br/>
+                    Кликните на корабль правой кнопкой мыши чтобы повернуть его
+                </span>}
+
+            { arrangeShipsMode === 'begin' &&
             <ul className='battlefield-menu--list'>
-                <li onClick={handleGameMode.bind(null,'manual')}> 1) Вручную </li>
-                <li onClick={handleGameMode.bind(null,'auto')}> 2) Автоматически </li>
+                <li onClick={()=>setArrangeShipsMode('manual')}> 1) Вручную </li>
+                <li onClick={()=>setArrangeShipsMode('auto')}> 2) Автоматически </li>
             </ul>
             }
 
-            { arrangeShipsMode==='manual' &&
+            { (arrangeShipsMode==='manual' || arrangeShipsMode==='auto') &&
                 <div className='battlefield-menu--ships'>
                     { playerShips.map(ship =>
-                        <Ship key={uuid()} length={ship.length} num={ship.num} setPlayerShips={setPlayerShips}/> ) }
+                        <Ship key={uuid()} length={ship.length} num={ship.num} /> )
+                    }
                 </div>
             }
-                        
+
         </div>
     )
 }

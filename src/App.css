@@ -22,10 +22,9 @@
 }
 
 .app-title {
-  /* margin-bottom: 4px; */
-  grid-area: h;
+  width: fit-content;
   display: flex;
-  justify-content: center;
+  margin-left: 366px;
   align-items: center;
   font-size: 30px;
   text-decoration: underline;
@@ -40,13 +39,26 @@
 }
 
 .container {
-  padding-top: 5px;
+  padding-top: 4px;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
+}
+
+.war-info {
+  width: 788px;
+  height: 10%;
+  margin: 20px 0 0 66px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
+  border: dashed 3px blue;
+  border-radius: 5vmax;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .battlefield {
-  grid-area: b;
   display: grid;
   grid-template-areas:
   ". d d d d d d d d d d"
@@ -59,24 +71,25 @@
   "l c c c c c c c c c c"
   "l c c c c c c c c c c"
   "l c c c c c c c c c c";
-  margin: 0px 0 0 29px;
-  width: 369px;
-  height: 364px;
+  margin: 0px 65px 30px 29px;
+  padding: 0;
+  width: 368.5px;
+  height: 366px;
   box-sizing: border-box;
   font-size: 16px;
   font-weight: bold;
-
+  box-sizing: border-box;
 }
 
 .battlefield-pad {
+  margin: 0;
+  padding: 0;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
-  grid-column-gap: 1px;
-  grid-row-gap: 1px;
   grid-area: c;
   text-align: center;
-  border: 3px solid blue;
+  border: 2px solid blue;
   box-sizing: border-box;
 }
 
@@ -94,16 +107,28 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .battlefield-menu {
-  margin-left: 64px;
-  grid-area: c;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  flex: auto;
+  margin-left: 65px;
+  grid-area: c;
   font-size: 24px;
   font-weight: bold;
+}
+
+.battlefield-menu--title {
+  margin: 1rem 0 0 0;
+  padding: 0;
+}
+
+.battlefield-menu--remark {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
 }
 
 .battlefield-menu--list {
@@ -126,11 +151,11 @@
   margin-top: 10px;
 }
 
-.ship {      
+.ship {
+  margin-bottom: 33px;
   display: flex;
   justify-content: center;
   align-items: center;              
-  height: 34px;
   border: 3px solid blue;
   box-sizing: border-box;
   font-size: 14px;
@@ -146,6 +171,23 @@
   height: 66px;
 }
 
+.shipEl,
+.empty,
+.deadarea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: .7rem;  
+}
+
 .shipEl {
-  border: 1px red solid;
+  border: 2px solid blue;
+  background: repeating-linear-gradient(-45deg, #555 0, #555 2px, transparent 1px, transparent 5px);
+}
+
+.deadarea {
+  background-color: rgba(117, 190, 248, 0.2);
 }

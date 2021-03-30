@@ -1,41 +1,53 @@
-import React, {useCallback, useContext, useEffect, useState} from 'react';
+import React, {useContext} from 'react';
 import uuid from 'react-uuid';
 
 import { BattlefieldContext } from "./BattlefieldContext";
 
 import ArrangeShips from './ArrangeShips';
 import DrawIdx from './DrawIdx';
+import War from './War';
 
 export default function Battlefield() {
-    const { arrangeShips } = useContext(BattlefieldContext);
-    const { playerBF } = useContext(BattlefieldContext);
-
-
-    useEffect(() => console.log('playerBF=',playerBF),[playerBF]);
+    const { arrangeShips, playerBF, compBF } = useContext(BattlefieldContext);
 
     return (
+        <React.Fragment>
         <div className='container'>
             <div className='battlefield'>
                 <DrawIdx type='digits'/>
                 <DrawIdx type='letters'/>
                 <div className='battlefield-pad'>
                     { playerBF.length === 10 &&
-                    playerBF.flat().map(el=> <span className={el!==+el ? 'empty' : 'shipEl'} key={uuid()}>{el===+el ? +el: '.'}</span>) }
+                    playerBF.flat().map(el=>
+                        <span 
+                            className={+el===el ? 'shipEl' : el==='D' ? 'deadarea' : 'empty'}
+                            key={uuid()}
+                        >
+                            { +el===el && el }
+                        </span>) }
                 </div>
             </div>
 
             { arrangeShips && <ArrangeShips/> }
 
             { !arrangeShips &&
-                <div className='battlefield'>
-                <DrawIdx type='digits'/>
-                <DrawIdx type='letters'/>
-                <div className='battlefield-pad'>
-                    {new Array(100).fill(0).map((el,idx) => <span key={uuid()} style={{fontSize:'6px'}}>{idx}</span>)}
+                <div className='battlefield battlefield--comp'>
+                    <DrawIdx type='digits'/>
+                    <DrawIdx type='letters'/>
+                    <div className='battlefield-pad'>
+                    { compBF.length === 10 &&
+                        compBF.flat().map(el=>
+                            <span   className={el===+el ? 'shipEl' : el==='D' ? 'deadarea' : 'empty'}
+                                    key={uuid()} >
+                                {/* { el===+el && el } */}
+                                { el }
+                            </span>) }
+                    </div>
                 </div>
-            </div>
             }
-
         </div>
+
+        { !arrangeShips && <War/>}
+        </React.Fragment>
     )
 }

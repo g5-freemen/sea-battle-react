@@ -8,8 +8,8 @@ export default function DrawIdx({type}) {
     { digits.map( item =>
         <span   className='idx'
                 key={uuid()}
-                style={type === 'digits' ? {gridColumn: item} : {gridRow: item}}>
-            { type === 'digits' ? item : String.fromCharCode(item+1039) }
+                style={ type==='digits' ? {gridColumn: item} : {gridRow: item} }>
+            { type === 'digits' ? item : item!==10 ? String.fromCharCode(item+1039) : 'К' }
         </span>
     ) }
     </div>

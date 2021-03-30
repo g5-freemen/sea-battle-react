@@ -5,12 +5,35 @@ const Provider = BattlefieldContext.Provider;
 
 export default function ContextApp ({ children }) {
     const [ arrangeShips, setArrangeShips ] = useState(true);
+    const [ arrangeShipsMode, setArrangeShipsMode ] = useState('begin');
     const [ playerBF, setPlayerBF ] = useState(Array(10).fill('-').map(() => Array(10).fill('-')));
     const [ compBF, setCompBF ] = useState(Array(10).fill('-').map(() => Array(10).fill('-')));
     const [ bfCoord, setBFcoord ] = useState({});
+    const [ playerShips, setPlayerShips ] = useState(null);
+    const [ compShips, setCompShips ] = useState(null);
+    const SHIPS_DATA = [ [1, 4], [2, 3], [3, 2], [4, 1] ];
 
-    function getBFcoord() {
-        let box = document.querySelector('.battlefield-pad').getBoundingClientRect();
+    const message = {
+        playerTurn: 'Ваш ход!',
+        compTurn: 'Ход компьютера!',
+        begin: 'Да начнётся битва!',
+        playerHits: 'Вы попали!',
+        playerMissed: 'Вы промахнулись!',
+        compHits: 'Компьютер попал!',
+        compMissed: 'Компьютер промахнулся!'
+    }
+
+    function createShips(data) {
+        let n=0;
+        for (let item of data) 
+            for (let i=0; i<item[0]; i++) {
+                let ship = { num: n++, length: item[1] }
+                setPlayerShips(prev => prev ? prev.concat(ship) : [ship]);
+                setCompShips(prev => prev ? prev.concat(ship) : [ship]);
+            }
+    };
+
+    function getBFcoord(box) {
         let data = {
           top: box.top,
           bottom: box.bottom,
@@ -24,14 +47,30 @@ export default function ContextApp ({ children }) {
         setBFcoord(data);
       }
 
-    useEffect(()=> getBFcoord(), [])
+    useEffect(()=> {
+        let elem = document.querySelector('.battlefield-pad').getBoundingClientRect();
+        createShips(SHIPS_DATA);
+        getBFcoord(elem);
+        
+    }, [])
+
+    useEffect(()=> {
+        if (arrangeShips===false) {
+            let elem = document.querySelectorAll('.battlefield-pad')[1].getBoundingClientRect();
+            getBFcoord(elem);
+        }
+    }, [arrangeShips])
 
     return (
         <Provider value={{
             arrangeShips, setArrangeShips,
+            arrangeShipsMode, setArrangeShipsMode,
             playerBF, setPlayerBF,
             compBF, setCompBF,
-            bfCoord
+            playerShips, setPlayerShips,
+            compShips, setCompShips,
+            bfCoord,
+            message,
         }}>
             {children}
         </Provider>
