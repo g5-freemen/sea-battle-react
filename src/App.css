@@ -196,3 +196,21 @@
   border: 2px solid red;
   background: repeating-linear-gradient(-45deg, red 0, red 2px, transparent 1px, transparent 5px);
 }
+
+.footer__link {
+  position: absolute;
+  top: 94vh;
+  left: 25vw;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 1s;
+}
+
+.footer__link:hover {
+  transform: scale(1.2);
+}
