@@ -1,7 +1,8 @@
 {
   "name": "sea-battle",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "homepage": "./", 
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -10,6 +11,7 @@
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.3",
     "react-uuid": "^1.0.2",
+    "use-sound": "^2.0.1",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
