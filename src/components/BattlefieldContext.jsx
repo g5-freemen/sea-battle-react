@@ -1,4 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import useSound from 'use-sound';
+import mp3Hit from '../sound/hit.mp3';
+import mp3Miss from '../sound/miss.mp3';
+import mp3Fight from '../sound/fight.mp3';
+import mp3winComp from '../sound/winComp.mp3';
+import mp3winPlayer from '../sound/winPlayer.mp3';
 export const BattlefieldContext = React.createContext({});
 
 const Provider = BattlefieldContext.Provider;
@@ -11,6 +17,7 @@ export default function ContextApp ({ children }) {
     const [ bfCoord, setBFcoord ] = useState({});
     const [ playerShips, setPlayerShips ] = useState(null);
     const [ compShips, setCompShips ] = useState(null);
+    const [ turn, setTurn ] = useState('begin'); //begin,player,comp
     const SHIPS_DATA = [ [1, 4], [2, 3], [3, 2], [4, 1] ];
 
     const message = {
@@ -20,7 +27,28 @@ export default function ContextApp ({ children }) {
         playerHits: 'Вы попали!',
         playerMissed: 'Вы промахнулись!',
         compHits: 'Компьютер попал!',
-        compMissed: 'Компьютер промахнулся!'
+        compMissed: 'Компьютер промахнулся!',
+        winPlayer: 'Вы победили!'.toUpperCase(),
+        winComp: 'Компьютер победил!'.toUpperCase(),
+    };
+
+    const [playHit] = useSound(mp3Hit);
+    const [playMiss] = useSound(mp3Miss);
+    const [playFight] = useSound(mp3Fight);
+    const [playWinComp]= useSound(mp3winComp);
+    const [playWinPlayer]= useSound(mp3winPlayer);
+    
+    function checkWinner() {
+        if (turn.includes('comp') || turn.includes('player')) {
+            if ([...playerBF].flat().filter(el=> el===+el).length === 0) {
+                playWinComp();
+                setTurn('winComp');
+            }
+            if ([...compBF].flat().filter(el=> el===+el).length === 0) {
+                playWinPlayer();
+                setTurn('winPlayer');
+            }
+        }
     }
 
     function createShips(data) {
@@ -32,6 +60,13 @@ export default function ContextApp ({ children }) {
                 setCompShips(prev => prev ? prev.concat(ship) : [ship]);
             }
     };
+
+    function getRnd(i=0) {
+        while (i<1 || i>10) {
+          i = Math.ceil(Math.random()*10)
+        }
+        return i;
+    }
 
     function getBFcoord(box) {
         let data = {
@@ -71,6 +106,8 @@ export default function ContextApp ({ children }) {
             compShips, setCompShips,
             bfCoord,
             message,
+            turn, setTurn,
+            getRnd, playHit, playMiss, playFight, checkWinner
         }}>
             {children}
         </Provider>

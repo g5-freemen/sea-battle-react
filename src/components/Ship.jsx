@@ -3,15 +3,10 @@ import { BattlefieldContext } from "./BattlefieldContext";
 import uuid from 'react-uuid';
 
 export default function Ship({length, num}) {
-  const { setPlayerShips, compShips, setCompShips, compBF, setCompBF, bfCoord, playerBF, setPlayerBF, arrangeShipsMode } = useContext(BattlefieldContext);
+  const { setPlayerShips, compShips, setCompShips,
+        compBF, setCompBF, bfCoord, playerBF,
+        setPlayerBF, arrangeShipsMode, getRnd } = useContext(BattlefieldContext);
   const [ orientY, setOrientY ] = useState(arrangeShipsMode!=='auto' ? false : Math.random()>.5 );
-
-  function getRnd(i=0) {
-    while (i<1 || i>10) {
-      i = Math.ceil(Math.random()*10)
-    }
-    return i;
-  }
 
   function checkSetShip(shipCol,shipRow,trg,comp) {
     let putOk = true;
@@ -71,7 +66,7 @@ export default function Ship({length, num}) {
       if (trg) trg.onmouseup = null;
     }
 
-    if (!putOk) { // retry to set ship if bad position
+    if (!putOk) { // retry to set ship if bad position (auto set & comp bf) 
       if (!comp && arrangeShipsMode==='auto') {
         checkSetShip(getRnd(),getRnd(),null)
       } else if (comp) {

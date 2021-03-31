@@ -20,10 +20,10 @@ export default function Battlefield() {
                     { playerBF.length === 10 &&
                     playerBF.flat().map(el=>
                         <span 
-                            className={+el===el ? 'shipEl' : el==='D' ? 'deadarea' : 'empty'}
+                            className={+el===el ? 'shipEl' : el==='D' ? 'deadarea' : el==='X' ? 'hit' : 'empty'}
                             key={uuid()}
                         >
-                            { +el===el && el }
+                            { el==='*' && el }
                         </span>) }
                 </div>
             </div>
@@ -37,10 +37,10 @@ export default function Battlefield() {
                     <div className='battlefield-pad'>
                     { compBF.length === 10 &&
                         compBF.flat().map(el=>
-                            <span   className={el===+el ? 'shipEl' : el==='D' ? 'deadarea' : 'empty'}
-                                    key={uuid()} >
-                                {/* { el===+el && el } */}
-                                { el }
+                            <span   
+                                className={el==='X' ? 'hit' : 'empty'}
+                                key={uuid()} >
+                                    { el==='*' && el }
                             </span>) }
                     </div>
                 </div>

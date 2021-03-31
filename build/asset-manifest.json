@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "./static/css/main.d0a447ad.chunk.css",
+    "main.js": "./static/js/main.8cb171c8.chunk.js",
+    "main.js.map": "./static/js/main.8cb171c8.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.bdafcbc8.js",
+    "runtime-main.js.map": "./static/js/runtime-main.bdafcbc8.js.map",
+    "static/js/2.a3e107ce.chunk.js": "./static/js/2.a3e107ce.chunk.js",
+    "static/js/2.a3e107ce.chunk.js.map": "./static/js/2.a3e107ce.chunk.js.map",
+    "static/js/3.0b7ac7c7.chunk.js": "./static/js/3.0b7ac7c7.chunk.js",
+    "static/js/3.0b7ac7c7.chunk.js.map": "./static/js/3.0b7ac7c7.chunk.js.map",
+    "index.html": "./index.html",
+    "static/css/main.d0a447ad.chunk.css.map": "./static/css/main.d0a447ad.chunk.css.map",
+    "static/js/2.a3e107ce.chunk.js.LICENSE.txt": "./static/js/2.a3e107ce.chunk.js.LICENSE.txt",
+    "static/js/3.0b7ac7c7.chunk.js.LICENSE.txt": "./static/js/3.0b7ac7c7.chunk.js.LICENSE.txt",
+    "static/media/App.css": "./static/media/SegoePrint.c75c7b51.woff",
+    "static/media/fight.15e2f926.mp3": "./static/media/fight.15e2f926.mp3",
+    "static/media/hit.8c96d676.mp3": "./static/media/hit.8c96d676.mp3",
+    "static/media/miss.b9a5893c.mp3": "./static/media/miss.b9a5893c.mp3",
+    "static/media/winComp.f369007a.mp3": "./static/media/winComp.f369007a.mp3",
+    "static/media/winPlayer.4834e938.mp3": "./static/media/winPlayer.4834e938.mp3"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bdafcbc8.js",
+    "static/js/2.a3e107ce.chunk.js",
+    "static/css/main.d0a447ad.chunk.css",
+    "static/js/main.8cb171c8.chunk.js"
+  ]
+}

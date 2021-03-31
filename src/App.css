@@ -35,7 +35,6 @@
   cursor: none;
   color: red;
   transform: rotateY(360deg);
-
 }
 
 .container {
@@ -183,11 +182,17 @@
   font-size: .7rem;  
 }
 
-.shipEl {
+.shipEl,
+.hit {
   border: 2px solid blue;
   background: repeating-linear-gradient(-45deg, #555 0, #555 2px, transparent 1px, transparent 5px);
 }
 
 .deadarea {
   background-color: rgba(117, 190, 248, 0.2);
+}
+
+.hit {
+  border: 2px solid red;
+  background: repeating-linear-gradient(-45deg, red 0, red 2px, transparent 1px, transparent 5px);
 }
