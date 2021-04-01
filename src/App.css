@@ -197,9 +197,50 @@
   background: repeating-linear-gradient(-45deg, red 0, red 2px, transparent 1px, transparent 5px);
 }
 
+.time-machine--box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 2vh;
+  left: 2vw;
+  width: 15vmin;
+  height: 6vmin;
+}
+
+.time-machine--back {
+  font-size: 3rem;
+  border: none;
+  background: none;
+  transition: all .5s;
+  color: blue;
+  outline: none;
+}
+
+.time-machine--back:hover {
+  transform: scale(1.5);
+  cursor: pointer;
+}
+
+.turn-counter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 6vmin;
+  height: 6vmin;  
+  border: 3px solid blue;
+  border-radius: 50%;
+  font-weight: bold;
+  transition: all 1s;
+}
+
+.turn-counter:hover {
+  transform: rotateZ(-360deg);
+}
+
 .footer__link {
   position: absolute;
-  top: 94vh;
+  bottom: 4vh;
   left: 25vw;
   font-size: 0.9rem;
   font-weight: bold;

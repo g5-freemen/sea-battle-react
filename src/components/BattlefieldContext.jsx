@@ -18,7 +18,7 @@ export default function ContextApp ({ children }) {
     const [ playerShips, setPlayerShips ] = useState(null);
     const [ compShips, setCompShips ] = useState(null);
     const [ turn, setTurn ] = useState('begin'); //begin,player,comp
-    const SHIPS_DATA = [ [1, 4], [2, 3], [3, 2], [4, 1] ];
+    const [ turnNum, setTurnNum ] = useState(0);
 
     const message = {
         playerTurn: 'Ваш ход!',
@@ -48,10 +48,12 @@ export default function ContextApp ({ children }) {
                 playWinPlayer();
                 setTurn('winPlayer');
             }
+        return;
         }
     }
 
-    function createShips(data) {
+    function createShips() {
+        const data = [ [1, 4], [2, 3], [3, 2], [4, 1] ];
         let n=0;
         for (let item of data) 
             for (let i=0; i<item[0]; i++) {
@@ -84,7 +86,7 @@ export default function ContextApp ({ children }) {
 
     useEffect(()=> {
         let elem = document.querySelector('.battlefield-pad').getBoundingClientRect();
-        createShips(SHIPS_DATA);
+        createShips();
         getBFcoord(elem);
         
     }, [])
@@ -107,6 +109,7 @@ export default function ContextApp ({ children }) {
             bfCoord,
             message,
             turn, setTurn,
+            turnNum, setTurnNum,
             getRnd, playHit, playMiss, playFight, checkWinner
         }}>
             {children}

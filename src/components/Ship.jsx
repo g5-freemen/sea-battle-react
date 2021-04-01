@@ -3,7 +3,7 @@ import { BattlefieldContext } from "./BattlefieldContext";
 import uuid from 'react-uuid';
 
 export default function Ship({length, num}) {
-  const { setPlayerShips, compShips, setCompShips,
+  const { setPlayerShips, setCompShips,
         compBF, setCompBF, bfCoord, playerBF,
         setPlayerBF, arrangeShipsMode, getRnd } = useContext(BattlefieldContext);
   const [ orientY, setOrientY ] = useState(arrangeShipsMode!=='auto' ? false : Math.random()>.5 );
@@ -134,9 +134,7 @@ export default function Ship({length, num}) {
             onDragStart = { () => {return false} }
             onMouseDown = {handleShipMove}
             onContextMenu = {handleRotate}
-    >
-      { num }
-    </span>
+    />
     <span className='ship-margin' />
   </React.Fragment>
   )

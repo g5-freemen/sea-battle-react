@@ -4,10 +4,30 @@ import uuid from 'react-uuid';
 import { BattlefieldContext } from "./BattlefieldContext";
 
 export default function War() {
-    const { message, bfCoord, compBF, setCompBF, playerBF, setPlayerBF,
-            getRnd, turn, setTurn, checkWinner,
+    const { message, bfCoord, checkWinner,
+            compBF, setCompBF, playerBF, setPlayerBF,
+            getRnd, turn, setTurn, 
+            turnNum, setTurnNum,
             playHit, playMiss, playFight } = useContext(BattlefieldContext);
     const [ alarm, setAlarm ] = useState(null);
+    const pads = document.querySelectorAll('.battlefield-pad');
+
+    function turnBack() {
+        alert ('Turn back from ',turnNum,' to prev ',turnNum-1);
+    }
+
+    function shoot(ev) {
+        let x, y;
+        let evX = ev.clientX;
+        let evY = ev.clientY;
+
+        for (let i=0; i<bfCoord.gridCol.length-1; i++) { // get player's shoot Col & Row
+            if (evX >= bfCoord.gridCol[i] && evX <= bfCoord.gridCol[i+1]) x = i+1;
+            if (evY >= bfCoord.gridRow[i] && evY <= bfCoord.gridRow[i+1]) y = i+1;
+        };
+
+        shootCheck(x,y);
+    } 
 
     function shootCheck(x,y) {
         if (!x || !y) {
@@ -23,71 +43,88 @@ export default function War() {
             turn==='player' ? setCompBF(newBF) : setPlayerBF(newBF);
             turn==='player' ? setAlarm('playerHits') : setAlarm('compHits');
 
-            if (turn==='comp') {
-                setTimeout(() => {
-                    setTurn('comp '+uuid());
+            if (turn.includes('comp')) {
+                let newState = turn+(uuid());
+                setTimeout(()=>{
+                    setTurn(newState);
+                    return;
                 }, 999);
             }
-            return;
-        } else if (el==='X' || el==='*') { // shoot second time the same point
-            turn.includes('comp') && setTurn('comp '+uuid());
-            return;  
+        } else if (el==='X' || el==='*') {
+             // shoot second time the same point
+            if (turn.includes('comp')) {
+                let newState = turn+(uuid());
+                setTimeout(()=> {
+                    setTurn(newState)
+                    return;
+                }, 333);
+            }
         } else {                    // miss the target
-            newBF[y-1][x-1] = '*';
-            playMiss();
-            turn==='player' ? setCompBF(newBF) : setPlayerBF(newBF);
-            turn==='player' ? setAlarm('playerMissed') : setAlarm('compMissed');
+                newBF[y-1][x-1] = '*';
+                playMiss();
+                turn==='player' ? setCompBF(newBF) : setPlayerBF(newBF);
+                turn==='player' ? setAlarm('playerMissed') : setAlarm('compMissed');
             setTimeout(() => {
-                turn==='player' ? setTurn('comp') : setTurn('player');                
+                if (turn==='player') setTurn('comp')
+                else if (turn.includes('comp')) setTurn('player');
+                return; 
             }, 999);
-            return; 
         }
     }
 
-
     useEffect( () => {
+        checkWinner();
+
+        if (turn.includes('win')) {
+            try {
+                pads[1].removeEventListener('click',shoot);
+            }
+            catch(e) {
+                console.log(e);
+            }
+            
+            return;
+        }
+
         if (turn === 'begin') {
             playFight();
-            setTimeout( setTurn.bind(null,'player'), 2000)
+            setTimeout( setTurn.bind(null,'player'), 2000);
         };
-
-        checkWinner();
-        console.log('turn=',turn)
-
-        const pads = document.querySelectorAll('.battlefield-pad');
 
         if (turn.includes('player')) {
             document.body.style.cursor = 'auto';
             pads[1].style.cursor = 'pointer';
-            pads[1].addEventListener('click',(ev) => {
-                let x, y;
-                let evX = ev.clientX;
-                let evY = ev.clientY;
-        
-                for (let i=0; i<bfCoord.gridCol.length-1; i++) { // get player's shoot Col & Row
-                    if (evX >= bfCoord.gridCol[i] && evX <= bfCoord.gridCol[i+1]) x = i+1;
-                    if (evY >= bfCoord.gridRow[i] && evY <= bfCoord.gridRow[i+1]) y = i+1;
-                };
-
-                shootCheck(x,y);
-            } )
+            pads[1].addEventListener('click',shoot);
         }
 
         if (turn.includes('comp')) {
+            pads[1].removeEventListener('click',shoot);
             document.body.style.cursor = 'wait';
             pads[1].style.cursor = 'wait';
-
             shootCheck()
         }
     }, [turn]);
 
     useEffect(()=> {
-        if (alarm) {
-            setTimeout(setAlarm.bind(null,null), 2000);
-        }
-    }, [alarm])
+        alarm &&
+            setTimeout(() => setAlarm(null), 2000);       
+    }, [alarm]);
+
+    useEffect(() => setTurnNum(prev=> prev+1), [compBF] )
 
     return (
+        <React.Fragment>
+        <div className='time-machine--box'>
+            {turnNum>1 && 
+                <button className='time-machine--back'
+                        onClick={turnBack}>
+                    &#10094;
+                </button>
+            }
+            <div className='turn-counter'>
+                {turnNum}
+            </div>
+        </div>
         <div className='war-info'>
             { turn === 'begin' && message.begin }
             { turn.includes('player') && message.playerTurn }
@@ -100,5 +137,6 @@ export default function War() {
             { alarm === 'compHits' && message.compHits }
             { alarm === 'compMissed' && message.compMissed }
         </div>
+        </React.Fragment>
     )
 }
