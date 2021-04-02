@@ -16,7 +16,8 @@
   -khtml-user-select: none;    /* Konqueror */
   -moz-user-select: none;      /* Firefox */
   -ms-user-select: none; 
-  user-select: none;   
+  user-select: none;
+  transition: all 1s ease;
 }
 
 .app-title {
@@ -37,8 +38,8 @@
 
 .btn-lang,
 .lang-en {
-  width: 6vmin;
-  height: 6vmin; 
+  width: 3vmax;
+  height: 3vmax; 
   position: absolute;
   top: 2vh;
   right: 3vw;
@@ -215,7 +216,7 @@
 }
 
 .deadarea {
-  background-color: rgba(117, 190, 248, 0.2);
+  background: rgba(117, 190, 248, 0.2);
 }
 
 .hit {
@@ -230,8 +231,8 @@
   position: absolute;
   top: 2vh;
   left: 2vw;
-  width: 15vmin;
-  height: 6vmin;
+  width: 7vmax;
+  height: 3vmax;
 }
 
 .time-machine--back {
@@ -252,8 +253,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 6vmin;
-  height: 6vmin;  
+  width: 3vmax;
+  height: 3vmax;  
   border: 3px solid blue;
   border-radius: 50%;
   font-weight: bold;
@@ -280,4 +281,10 @@
 
 .footer__link:hover {
   transform: scale(1.2);
+}
+
+.darken {
+  background-color: #0093E9;
+  background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+  opacity: 0;
 }

@@ -9,8 +9,7 @@ export default function Battlefield() {
     const { message, lang, setLang, arrangeShips, playerBF, compBF } = useContext(BattlefieldContext);
 
     function handleLangBtn(ev) {
-        let trgClass = ev.target.classList;
-        trgClass.toggle('lang-en');
+        ev.target.classList.toggle('lang-en');
         lang==='ru' ? setLang('en') : setLang('ru');
     }
 

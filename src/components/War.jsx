@@ -9,19 +9,28 @@ export default function War() {
             getRnd, turn, setTurn, 
             turnNum, setTurnNum,
             playHit, playMiss, playFight,
-            store } = useContext(BattlefieldContext);
+            store, timeMachine, setTimeMachine } = useContext(BattlefieldContext);
     const [ alarm, setAlarm ] = useState(null);
     const pads = document.querySelectorAll('.battlefield-pad');
 
     function turnBack() {
-        console.log(store.getState());
-        // store.dispatch({ type: 'TURN_BACK' });
-        let prevBFs = JSON.parse( store.getState() );
-        console.log('must-be = ',prevBFs[turnNum-2]);
+        document.querySelector('.App').classList.toggle('darken');
+        setTimeout(() => {
+            document.querySelector('.App').classList.toggle('darken');
+        }, 1000);
+        // console.log('turn-back-bef',store.getState(),'   timeMachine=',timeMachine);
+        setTimeMachine(true);
+        store.dispatch({ type: 'TURN_BACK', payload: turnNum-1 });
+        // console.log('turn-back-aft',store.getState(),'   timeMachine=',timeMachine);
 
-        // setPlayerBF(prevBFs[turnNum-2].playerBF);
-        // setCompBF(prevBFs[turnNum-2].compBF);
-        // setTurnNum(prev=>prev-2);
+        let storedBFs = store.getState().map(el => JSON.parse(el));
+        let newBF = storedBFs[storedBFs.length-1]
+        // console.log('newBFs=',newBF);
+        let newPlayerBF = [...newBF.playerBF];
+        let newCompBF = [...newBF.compBF];
+        setPlayerBF( newPlayerBF );
+        setCompBF( newCompBF );
+        setTurnNum(prev=>prev-1);
     }
 
     function shoot(ev) {
@@ -106,7 +115,12 @@ export default function War() {
 
     useEffect(()=> alarm && setTimeout(() => setAlarm(null), 2000), [alarm]);
 
-    useEffect(() => setTurnNum(prev=> prev+1), [compBF] )
+    useEffect(() => {
+        console.log('compBF=',compBF);
+        console.log('redux store=',store.getState());
+        !timeMachine && setTurnNum( store.getState().length+1 );
+        timeMachine && setTimeMachine(false);
+    }, [compBF] )
 
     return (
         <React.Fragment>

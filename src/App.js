@@ -6,12 +6,9 @@ import { createStore } from 'redux';
 function timeMachine(state = [], action) {
   if (action.type === 'ADD_TURN') {
     return [...state, action.payload];
-    // let turnInfo = { playerBF, compBF};
-    // store.dispatch({ type: 'ADD_TURN', payload: turnInfo });
-    // return state;
   } else if (action.type ===  'TURN_BACK') {
-    return [...state].splice(-1);
-  } else
+    return state.filter((el,idx) => idx!==action.payload );
+  } 
   return state;
 }
 

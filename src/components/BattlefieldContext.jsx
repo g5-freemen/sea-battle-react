@@ -24,13 +24,14 @@ export default function ContextApp ({ children }) {
     const [ turn, setTurn ] = useState('begin'); //begin,player,comp
     const [ turnNum, setTurnNum ] = useState(0);
     const [ lang, setLang ] = useState('ru');
+    const [ timeMachine, setTimeMachine ] = useState(false);
 
     useEffect(() => {
-        if (turnNum>0) {
-        // let turnInfo = JSON.stringify({ playerBF, compBF });
-        let turnInfo = { turnNum, playerBF, compBF};
-        store.dispatch({ type: 'ADD_TURN', payload: turnInfo });
-        console.log (store.getState())
+        if (turnNum>0 && !timeMachine) {
+            // console.log ('before=',store.getState().map(el=>JSON.parse(el)))
+            let turnInfo = JSON.stringify({ playerBF, compBF });
+            store.dispatch({ type: 'ADD_TURN', payload: turnInfo });
+            // console.log ('after=',store.getState().map(el=>JSON.parse(el)))
         }
     }, [turnNum])
     
@@ -88,7 +89,6 @@ export default function ContextApp ({ children }) {
                 setTurn('winPlayer');
             }
         }
-        return;
     }
 
     function createShips() {
@@ -145,11 +145,11 @@ export default function ContextApp ({ children }) {
             compBF, setCompBF,
             playerShips, setPlayerShips,
             compShips, setCompShips,
-            bfCoord,
-            message,
+            bfCoord, message,
+            lang, setLang,
             turn, setTurn,
             turnNum, setTurnNum,
-            lang, setLang,
+            timeMachine, setTimeMachine,
             getRnd, playHit, playMiss, playFight, checkWinner,
             store
         }}>
