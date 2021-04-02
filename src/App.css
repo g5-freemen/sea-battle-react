@@ -1,8 +1,6 @@
 @font-face {
 	font-family: 'SegoePrint';
 	src: url('fonts/SegoePrint.woff') format('woff');
-	font-weight: normal;
-	font-style: normal;
 }
 
 .App {
@@ -35,6 +33,25 @@
   cursor: none;
   color: red;
   transform: rotateY(360deg);
+}
+
+.btn-lang,
+.lang-en {
+  width: 6vmin;
+  height: 6vmin; 
+  position: absolute;
+  top: 2vh;
+  right: 3vw;
+  background: url('./img/lang_ru.png') no-repeat;
+  background-size: contain;
+  border: none;
+  outline: none;
+  transition: all .3s;
+}
+
+.lang-en {
+  background: url('./img/lang_en.png') no-repeat;
+  background-size: contain;
 }
 
 .container {
@@ -70,7 +87,7 @@
   "l c c c c c c c c c c"
   "l c c c c c c c c c c"
   "l c c c c c c c c c c";
-  margin: 0px 65px 30px 29px;
+  margin: 2px 65px 30px 33px;
   padding: 0;
   width: 368.5px;
   height: 366px;
@@ -80,10 +97,16 @@
   box-sizing: border-box;
 }
 
+.battlefield--comp {
+  margin-left: 28px;
+}
+
 .battlefield-pad {
-  margin: 0;
+  margin-left: 3px;
   padding: 0;
   display: grid;
+  width: 331px;
+  height: 330px;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
   grid-area: c;
@@ -103,6 +126,8 @@
 }
 
 .idx {
+  width: 30px;
+  height: 33px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -139,7 +164,8 @@
   transition: all .2s;
 }
 
-.battlefield-menu--list li:hover {
+.battlefield-menu--list li:hover,
+.btn-lang:hover {
   transform: scale(1.5);
   cursor: pointer;
 }

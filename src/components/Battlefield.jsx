@@ -1,17 +1,25 @@
 import React, {useContext} from 'react';
 import uuid from 'react-uuid';
-
 import { BattlefieldContext } from "./BattlefieldContext";
-
 import ArrangeShips from './ArrangeShips';
 import DrawIdx from './DrawIdx';
 import War from './War';
 
 export default function Battlefield() {
-    const { arrangeShips, playerBF, compBF } = useContext(BattlefieldContext);
+    const { message, lang, setLang, arrangeShips, playerBF, compBF } = useContext(BattlefieldContext);
+
+    function handleLangBtn(ev) {
+        let trgClass = ev.target.classList;
+        trgClass.toggle('lang-en');
+        lang==='ru' ? setLang('en') : setLang('ru');
+    }
 
     return (
         <React.Fragment>
+        <h1 className='app-title'>
+          { message[lang].gameTitle }
+        </h1>
+        <button className='btn-lang' onClick={handleLangBtn} />
         <div className='container'>
             <div className='battlefield'>
                 <DrawIdx type='digits'/>
@@ -37,10 +45,8 @@ export default function Battlefield() {
                     <div className='battlefield-pad'>
                     { compBF.length === 10 &&
                         compBF.flat().map(el=>
-                            <span   
-                                className={el==='X' ? 'hit' : 'empty'}
-                                key={uuid()} >
-                                    { el==='*' && el }
+                            <span className={el==='X' ? 'hit' : 'empty'} key={uuid()} >
+                                { el==='*' && el }
                             </span>) }
                     </div>
                 </div>

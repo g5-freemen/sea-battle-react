@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
+
+import {store} from '../App';
+
 import useSound from 'use-sound';
 import mp3Hit from '../sound/hit.mp3';
 import mp3Miss from '../sound/miss.mp3';
 import mp3Fight from '../sound/fight.mp3';
 import mp3winComp from '../sound/winComp.mp3';
 import mp3winPlayer from '../sound/winPlayer.mp3';
+
 export const BattlefieldContext = React.createContext({});
 
 const Provider = BattlefieldContext.Provider;
@@ -19,17 +23,52 @@ export default function ContextApp ({ children }) {
     const [ compShips, setCompShips ] = useState(null);
     const [ turn, setTurn ] = useState('begin'); //begin,player,comp
     const [ turnNum, setTurnNum ] = useState(0);
+    const [ lang, setLang ] = useState('ru');
 
+    useEffect(() => {
+        if (turnNum>0) {
+        // let turnInfo = JSON.stringify({ playerBF, compBF });
+        let turnInfo = { turnNum, playerBF, compBF};
+        store.dispatch({ type: 'ADD_TURN', payload: turnInfo });
+        console.log (store.getState())
+        }
+    }, [turnNum])
+    
     const message = {
-        playerTurn: 'Ваш ход!',
-        compTurn: 'Ход компьютера!',
-        begin: 'Да начнётся битва!',
-        playerHits: 'Вы попали!',
-        playerMissed: 'Вы промахнулись!',
-        compHits: 'Компьютер попал!',
-        compMissed: 'Компьютер промахнулся!',
-        winPlayer: 'Вы победили!'.toUpperCase(),
-        winComp: 'Компьютер победил!'.toUpperCase(),
+        ru: {
+            gameTitle: 'Морской бой',
+            arrangeShips: 'Расстановка кораблей',
+            arrangeShipsManual: 'Вручную',
+            arrangeShipsAuto: 'Автоматически',
+            remarkLBtn: 'Кликните на корабль левой кнопкой мыши чтобы выбрать его',
+            remarkRBtn: 'Кликните на корабль правой кнопкой мыши чтобы повернуть его',
+            playerTurn: 'Ваш ход!',
+            compTurn: 'Ход компьютера!',
+            begin: 'Да начнётся битва!',
+            playerHits: 'Вы попали!',
+            playerMissed: 'Вы промахнулись!',
+            compHits: 'Компьютер попал!',
+            compMissed: 'Компьютер промахнулся!',
+            winPlayer: 'Вы победили!'.toUpperCase(),
+            winComp: 'Компьютер победил!'.toUpperCase(),
+        },
+        en: {
+            gameTitle: 'Sea Battle',
+            arrangeShips: 'Arrange Ships',
+            arrangeShipsManual: 'Manual',
+            arrangeShipsAuto: 'Automatic',
+            remarkLBtn: 'Click left mouse button on the ship to select it',
+            remarkRBtn: 'Click right mouse button on the ship to rotate it',
+            playerTurn: 'Your turn!',
+            compTurn: 'Computer turn!',
+            begin: `Fight!`,
+            playerHits: 'Hit the target!',
+            playerMissed: 'Miss the target!',
+            compHits: 'Computer Hit the target!',
+            compMissed: 'Computer Miss the target!',
+            winPlayer: 'You Win!'.toUpperCase(),
+            winComp: 'Computer Win!'.toUpperCase(),
+        }
     };
 
     const [playHit] = useSound(mp3Hit);
@@ -48,8 +87,8 @@ export default function ContextApp ({ children }) {
                 playWinPlayer();
                 setTurn('winPlayer');
             }
-        return;
         }
+        return;
     }
 
     function createShips() {
@@ -92,9 +131,9 @@ export default function ContextApp ({ children }) {
     }, [])
 
     useEffect(()=> {
-        if (arrangeShips===false) {
-            let elem = document.querySelectorAll('.battlefield-pad')[1].getBoundingClientRect();
-            getBFcoord(elem);
+        if (!arrangeShips) {
+            let box = document.querySelectorAll('.battlefield-pad')[1].getBoundingClientRect();
+            getBFcoord(box);
         }
     }, [arrangeShips])
 
@@ -110,7 +149,9 @@ export default function ContextApp ({ children }) {
             message,
             turn, setTurn,
             turnNum, setTurnNum,
-            getRnd, playHit, playMiss, playFight, checkWinner
+            lang, setLang,
+            getRnd, playHit, playMiss, playFight, checkWinner,
+            store
         }}>
             {children}
         </Provider>

@@ -4,16 +4,24 @@ import uuid from 'react-uuid';
 import { BattlefieldContext } from "./BattlefieldContext";
 
 export default function War() {
-    const { message, bfCoord, checkWinner,
+    const { message, bfCoord, checkWinner, lang,
             compBF, setCompBF, playerBF, setPlayerBF,
             getRnd, turn, setTurn, 
             turnNum, setTurnNum,
-            playHit, playMiss, playFight } = useContext(BattlefieldContext);
+            playHit, playMiss, playFight,
+            store } = useContext(BattlefieldContext);
     const [ alarm, setAlarm ] = useState(null);
     const pads = document.querySelectorAll('.battlefield-pad');
 
     function turnBack() {
-        alert ('Turn back from ',turnNum,' to prev ',turnNum-1);
+        console.log(store.getState());
+        // store.dispatch({ type: 'TURN_BACK' });
+        let prevBFs = JSON.parse( store.getState() );
+        console.log('must-be = ',prevBFs[turnNum-2]);
+
+        // setPlayerBF(prevBFs[turnNum-2].playerBF);
+        // setCompBF(prevBFs[turnNum-2].compBF);
+        // setTurnNum(prev=>prev-2);
     }
 
     function shoot(ev) {
@@ -45,21 +53,15 @@ export default function War() {
 
             if (turn.includes('comp')) {
                 let newState = turn+(uuid());
-                setTimeout(()=>{
-                    setTurn(newState);
-                    return;
-                }, 999);
+                setTimeout( () => setTurn(newState), 999);
             }
-        } else if (el==='X' || el==='*') {
-             // shoot second time the same point
+        } else if (el==='X' || el==='*') {  // shoot second time the same point
             if (turn.includes('comp')) {
                 let newState = turn+(uuid());
-                setTimeout(()=> {
-                    setTurn(newState)
-                    return;
-                }, 333);
+                setTurn(newState)
             }
-        } else {                    // miss the target
+            return;
+        } else {    // miss the target
                 newBF[y-1][x-1] = '*';
                 playMiss();
                 turn==='player' ? setCompBF(newBF) : setPlayerBF(newBF);
@@ -75,15 +77,13 @@ export default function War() {
     useEffect( () => {
         checkWinner();
 
-        if (turn.includes('win')) {
+        if (!turn.includes('player')) {
             try {
-                pads[1].removeEventListener('click',shoot);
+                if (pads.length>=2) pads[1].removeEventListener('click',shoot);
             }
             catch(e) {
                 console.log(e);
             }
-            
-            return;
         }
 
         if (turn === 'begin') {
@@ -98,17 +98,13 @@ export default function War() {
         }
 
         if (turn.includes('comp')) {
-            pads[1].removeEventListener('click',shoot);
             document.body.style.cursor = 'wait';
             pads[1].style.cursor = 'wait';
             shootCheck()
         }
     }, [turn]);
 
-    useEffect(()=> {
-        alarm &&
-            setTimeout(() => setAlarm(null), 2000);       
-    }, [alarm]);
+    useEffect(()=> alarm && setTimeout(() => setAlarm(null), 2000), [alarm]);
 
     useEffect(() => setTurnNum(prev=> prev+1), [compBF] )
 
@@ -126,16 +122,16 @@ export default function War() {
             </div>
         </div>
         <div className='war-info'>
-            { turn === 'begin' && message.begin }
-            { turn.includes('player') && message.playerTurn }
-            { turn.includes('comp') && message.compTurn }
-            { turn === 'winComp' && message.winComp }
-            { turn === 'winPlayer' && message.winPlayer }
+            { turn === 'begin' && message[lang].begin }
+            { turn === 'player' && message[lang].playerTurn }
+            { turn.includes('comp') && message[lang].compTurn }
+            { turn === 'winComp' && message[lang].winComp }
+            { turn === 'winPlayer' && message[lang].winPlayer }
             &nbsp;
-            { alarm === 'playerHits' && message.playerHits }
-            { alarm === 'playerMissed' && message.playerMissed }
-            { alarm === 'compHits' && message.compHits }
-            { alarm === 'compMissed' && message.compMissed }
+            { alarm === 'playerHits' && message[lang].playerHits }
+            { alarm === 'playerMissed' && message[lang].playerMissed }
+            { alarm === 'compHits' && message[lang].compHits }
+            { alarm === 'compMissed' && message[lang].compMissed }
         </div>
         </React.Fragment>
     )

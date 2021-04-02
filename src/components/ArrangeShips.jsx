@@ -4,7 +4,7 @@ import uuid from 'react-uuid';
 import Ship from './Ship';
 
 export default function ArrangeShips() {
-    const { playerShips, arrangeShipsMode, setArrangeShipsMode, setArrangeShips } = useContext(BattlefieldContext);
+    const { lang, message, playerShips, arrangeShipsMode, setArrangeShipsMode, setArrangeShips } = useContext(BattlefieldContext);
 
     function handleKeyboard(ev) {
         if (ev.key==='1') setArrangeShipsMode('manual')
@@ -26,21 +26,24 @@ export default function ArrangeShips() {
         <div className='battlefield-menu'>
 
             { (arrangeShipsMode==='begin' || arrangeShipsMode==='manual' || arrangeShipsMode==='auto') &&
-             <p className='battlefield-menu--title'>Расстановка кораблей
-                {arrangeShipsMode === 'manual' && <span>: вручную</span>}
-                {arrangeShipsMode === 'auto' && <span>: авто</span>}
+             <p className='battlefield-menu--title'> {message[lang].arrangeShips}
+                { lang==='en' && arrangeShipsMode!=='begin' &&
+                    <span>: {arrangeShipsMode}</span> 
+                }
+                { lang==='ru' && arrangeShipsMode==='manual' && <span>: вручную</span> }
+                { lang==='ru' && arrangeShipsMode==='auto' && <span>: авто</span> }
             </p> }
 
             {arrangeShipsMode === 'manual' &&
                 <span className='battlefield-menu--remark'>
-                    Кликните на корабль левой кнопкой мыши чтобы выбрать его<br/>
-                    Кликните на корабль правой кнопкой мыши чтобы повернуть его
+                    { message[lang].remarkLBtn } <br/>
+                    { message[lang].remarkRBtn }
                 </span>}
 
             { arrangeShipsMode === 'begin' &&
             <ul className='battlefield-menu--list'>
-                <li onClick={()=>setArrangeShipsMode('manual')}> 1) Вручную </li>
-                <li onClick={()=>setArrangeShipsMode('auto')}> 2) Автоматически </li>
+                <li onClick={()=>setArrangeShipsMode('manual')}> 1) {message[lang].arrangeShipsManual}</li>
+                <li onClick={()=>setArrangeShipsMode('auto')}> 2) {message[lang].arrangeShipsAuto}</li>
             </ul>
             }
 

@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "./static/css/main.299d141a.chunk.css",
-    "main.js": "./static/js/main.17356bc9.chunk.js",
-    "main.js.map": "./static/js/main.17356bc9.chunk.js.map",
-    "runtime-main.js": "./static/js/runtime-main.b61e6e86.js",
-    "runtime-main.js.map": "./static/js/runtime-main.b61e6e86.js.map",
-    "static/js/2.3a233f8e.chunk.js": "./static/js/2.3a233f8e.chunk.js",
-    "static/js/2.3a233f8e.chunk.js.map": "./static/js/2.3a233f8e.chunk.js.map",
-    "static/js/3.8f260942.chunk.js": "./static/js/3.8f260942.chunk.js",
-    "static/js/3.8f260942.chunk.js.map": "./static/js/3.8f260942.chunk.js.map",
+    "main.css": "./static/css/main.1788fbdb.chunk.css",
+    "main.js": "./static/js/main.3931b724.chunk.js",
+    "main.js.map": "./static/js/main.3931b724.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.f7aa50b8.js",
+    "runtime-main.js.map": "./static/js/runtime-main.f7aa50b8.js.map",
+    "static/js/2.f42cc4e8.chunk.js": "./static/js/2.f42cc4e8.chunk.js",
+    "static/js/2.f42cc4e8.chunk.js.map": "./static/js/2.f42cc4e8.chunk.js.map",
+    "static/js/3.d17e035f.chunk.js": "./static/js/3.d17e035f.chunk.js",
+    "static/js/3.d17e035f.chunk.js.map": "./static/js/3.d17e035f.chunk.js.map",
     "index.html": "./index.html",
-    "static/css/main.299d141a.chunk.css.map": "./static/css/main.299d141a.chunk.css.map",
-    "static/js/2.3a233f8e.chunk.js.LICENSE.txt": "./static/js/2.3a233f8e.chunk.js.LICENSE.txt",
-    "static/js/3.8f260942.chunk.js.LICENSE.txt": "./static/js/3.8f260942.chunk.js.LICENSE.txt",
-    "static/media/App.css": "./static/media/SegoePrint.c75c7b51.woff",
+    "static/css/main.1788fbdb.chunk.css.map": "./static/css/main.1788fbdb.chunk.css.map",
+    "static/js/2.f42cc4e8.chunk.js.LICENSE.txt": "./static/js/2.f42cc4e8.chunk.js.LICENSE.txt",
+    "static/js/3.d17e035f.chunk.js.LICENSE.txt": "./static/js/3.d17e035f.chunk.js.LICENSE.txt",
+    "static/media/App.css": "./static/media/lang_ru.140d3f63.png",
     "static/media/fight.15e2f926.mp3": "./static/media/fight.15e2f926.mp3",
     "static/media/hit.8c96d676.mp3": "./static/media/hit.8c96d676.mp3",
     "static/media/miss.b9a5893c.mp3": "./static/media/miss.b9a5893c.mp3",
@@ -21,9 +21,9 @@
     "static/media/winPlayer.4834e938.mp3": "./static/media/winPlayer.4834e938.mp3"
   },
   "entrypoints": [
-    "static/js/runtime-main.b61e6e86.js",
-    "static/js/2.3a233f8e.chunk.js",
-    "static/css/main.299d141a.chunk.css",
-    "static/js/main.17356bc9.chunk.js"
+    "static/js/runtime-main.f7aa50b8.js",
+    "static/js/2.f42cc4e8.chunk.js",
+    "static/css/main.1788fbdb.chunk.css",
+    "static/js/main.3931b724.chunk.js"
   ]
 }
