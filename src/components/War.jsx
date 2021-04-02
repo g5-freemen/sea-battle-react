@@ -24,10 +24,10 @@ export default function War() {
         // console.log('turn-back-aft',store.getState(),'   timeMachine=',timeMachine);
 
         let storedBFs = store.getState().map(el => JSON.parse(el));
-        let newBF = storedBFs[storedBFs.length-1]
+        let newBFs = storedBFs[storedBFs.length-1]
         // console.log('newBFs=',newBF);
-        let newPlayerBF = [...newBF.playerBF];
-        let newCompBF = [...newBF.compBF];
+        let newPlayerBF = [...newBFs.playerBF];
+        let newCompBF = [...newBFs.compBF];
         setPlayerBF( newPlayerBF );
         setCompBF( newCompBF );
         setTurnNum(prev=>prev-1);
