@@ -79,14 +79,14 @@ export default function ContextApp ({ children }) {
     const [playWinPlayer]= useSound(mp3winPlayer);
     
     function checkWinner() {
-        if (turn.includes('comp') || turn.includes('player')) {
+        if (turn.includes('comp') || turn==='player') {
             if ([...playerBF].flat().filter(el=> el===+el).length === 0) {
-                playWinComp();
                 setTurn('winComp');
-            }
+                playWinComp();
+            };
             if ([...compBF].flat().filter(el=> el===+el).length === 0) {
-                playWinPlayer();
                 setTurn('winPlayer');
+                playWinPlayer();
             }
         }
     }

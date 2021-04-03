@@ -1,14 +1,14 @@
+
+
 @font-face {
 	font-family: 'SegoePrint';
 	src: url('fonts/SegoePrint.woff') format('woff');
 }
 
 .App {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
   background: url(img/grid.png);
   font-family: 'SegoePrint';
   -webkit-touch-callout: none; /* iOS Safari */
@@ -20,8 +20,14 @@
   transition: all 1s ease;
 }
 
+.wrap {
+  display: flex;
+  flex-flow: column wrap;
+  width: 65vw;
+}
+
 .app-title {
-  width: fit-content;
+  width: max-content;
   display: flex;
   margin-left: 366px;
   align-items: center;
@@ -38,11 +44,11 @@
 
 .btn-lang,
 .lang-en {
-  width: 3vmax;
-  height: 3vmax; 
   position: absolute;
-  top: 2vh;
-  right: 3vw;
+  width: 3.3vmax;
+  height: 3.3vmax;
+  margin: 1rem auto 0 50rem;
+  display: flex;
   background: url('./img/lang_ru.png') no-repeat;
   background-size: contain;
   border: none;
@@ -106,8 +112,8 @@
   margin-left: 3px;
   padding: 0;
   display: grid;
-  width: 331px;
-  height: 330px;
+  width: 332px;
+  height: 332px;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
   grid-area: c;
@@ -128,7 +134,7 @@
 
 .idx {
   width: 30px;
-  height: 33px;
+  height: 32px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -136,6 +142,7 @@
 }
 
 .battlefield-menu {
+  width: max-content;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -174,6 +181,7 @@
 .battlefield-menu--ships {
   display: flex;
   flex-flow: row wrap;
+  width: 50%;
   margin-top: 10px;
 }
 
@@ -265,10 +273,14 @@
   transform: rotateZ(-360deg);
 }
 
+.footer {
+  margin: 2rem auto .5rem;
+}
+
 .footer__link {
-  position: absolute;
-  bottom: 4vh;
-  left: 25vw;
+  width: max-content;
+  display: flex;
+  flex-flow: row nowrap;
   font-size: 0.9rem;
   font-weight: bold;
   color: black;
@@ -288,3 +300,22 @@
   background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
   opacity: 0;
 }
+
+@media screen and (max-width: 1367px) {
+  html {
+    transform: scale(0.75);
+  }
+}
+
+/* @media (orientation: portrait) {
+  html {
+    transform: rotate(-90deg) scale(0.5);
+    transform-origin: left top;
+    width: 200vh;
+    height: 200vw;
+    overflow-x: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+} */
