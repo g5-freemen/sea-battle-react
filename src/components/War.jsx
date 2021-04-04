@@ -59,11 +59,11 @@ export default function War() {
             y = getRnd();
         }
 
-        if (turn.includes('comp') && compLastHit!==null ) {   //shoot second time the same ship
+        if (turn.includes('comp') && compLastHit!==null ) {   // comp shoot second time the same ship
             let playerBFstate = [...playerBF];
             
             if (playerBFstate.flat().toString().includes(compLastHit)) {
-                if ( Math.random()<.4 ) {
+                if ( Math.random()<.4 ) { // chance <40%
                     let stop = false;
                     for (let i=0; i<playerBFstate.length; i++) {
                         for (let j=0; j<playerBFstate[i].length; j++) {
