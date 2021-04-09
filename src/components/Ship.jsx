@@ -114,7 +114,7 @@ export default function Ship({length, num}) {
     ev.preventDefault();
     setOrientY(prev=>!prev);
   }
-           
+  
   useEffect( () => { // auto set ships for Player and PC 
     if (arrangeShipsMode==='auto') {
       setTimeout(()=> {

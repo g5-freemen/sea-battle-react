@@ -11,13 +11,16 @@ export default function Battlefield() {
     function handleLangBtn(ev) {
         ev.target.classList.toggle('lang-en');
         lang==='ru' ? setLang('en') : setLang('ru');
+        if (ev.target.className.includes('lang-en')) 
+            document.title = message.en.gameTitle
+        else document.title = message.ru.gameTitle;
     }
 
     return (
         <div className='wrap'>
             <button className='btn-lang' onClick={handleLangBtn} />
             <h1 className='app-title'>
-            { message[lang].gameTitle }
+                { message[lang].gameTitle }
             </h1>
             <div className='container'>
                 <div className='battlefield'>
