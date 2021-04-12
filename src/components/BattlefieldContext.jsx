@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-import {store} from '../App';
+import { store } from '../App';
+import { message } from './message';
 
 import useSound from 'use-sound';
 import mp3Hit from '../sound/hit.mp3';
@@ -35,43 +36,6 @@ export default function ContextApp ({ children }) {
         }
     }, [turnNum])
     
-    const message = {
-        ru: {
-            gameTitle: 'Морской бой',
-            arrangeShips: 'Расстановка кораблей',
-            arrangeShipsManual: 'Вручную',
-            arrangeShipsAuto: 'Автоматически',
-            remarkLBtn: 'Кликните на корабль левой кнопкой мыши чтобы выбрать его',
-            remarkRBtn: 'Кликните на корабль правой кнопкой мыши чтобы повернуть его',
-            playerTurn: 'Ваш ход!',
-            compTurn: 'Ход компьютера!',
-            begin: 'Да начнётся битва!',
-            playerHits: 'Вы попали!',
-            playerMissed: 'Вы промахнулись!',
-            compHits: 'Компьютер попал!',
-            compMissed: 'Компьютер промахнулся!',
-            winPlayer: 'Вы победили!'.toUpperCase(),
-            winComp: 'Компьютер победил!'.toUpperCase(),
-        },
-        en: {
-            gameTitle: 'Sea Battle',
-            arrangeShips: 'Arrange Ships',
-            arrangeShipsManual: 'Manual',
-            arrangeShipsAuto: 'Automatic',
-            remarkLBtn: 'Click left mouse button on the ship to select it',
-            remarkRBtn: 'Click right mouse button on the ship to rotate it',
-            playerTurn: 'Your turn!',
-            compTurn: 'Computer turn!',
-            begin: `Fight!`,
-            playerHits: 'Hit the target!',
-            playerMissed: 'Miss the target!',
-            compHits: 'Computer Hit the target!',
-            compMissed: 'Computer Miss the target!',
-            winPlayer: 'You Win!'.toUpperCase(),
-            winComp: 'Computer Win!'.toUpperCase(),
-        }
-    };
-
     const [playHit] = useSound(mp3Hit);
     const [playMiss] = useSound(mp3Miss);
     const [playFight] = useSound(mp3Fight);

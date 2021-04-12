@@ -1,14 +1,16 @@
 
-
 @font-face {
 	font-family: 'SegoePrint';
 	src: url('fonts/SegoePrint.woff') format('woff');
 }
 
+body {
+  background: url("./img/grid.png") repeat;
+}
+
 .App {
   width: 100vw;
   height: 100vh;
-  background: url(img/grid.png);
   font-family: 'SegoePrint';
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none;   /* Chrome/Safari/Opera */
@@ -32,7 +34,7 @@
   align-items: center;
   font-size: 30px;
   text-decoration: underline;
-  transition: all 1s;
+  transition: all 1s ease;
 }
 
 .app-title:hover {

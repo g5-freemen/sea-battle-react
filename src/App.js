@@ -7,9 +7,9 @@ function timeMachine(state = [], action) {
   if (action.type === 'ADD_TURN') {
     return [...state, action.payload];
   } else if (action.type ===  'TURN_BACK') {
-    return state.filter((el,idx) => idx!==action.payload );
+    return [...state].filter((el,idx) => idx<action.payload );
   } 
-  return state;
+  return [...state];
 }
 
 export const store = createStore(timeMachine);
