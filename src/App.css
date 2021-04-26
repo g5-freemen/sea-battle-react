@@ -308,15 +308,27 @@ body {
   }
 }
 
-/* @media (orientation: portrait) {
+@media (orientation: portrait) and (max-width: 400px) {
   html {
-    transform: rotate(-90deg) scale(0.5);
+    transform: rotate(-90deg) scale(0.56);
     transform-origin: left top;
-    width: 200vh;
-    height: 200vw;
-    overflow-x: hidden;
+    width: 100vh;
+    height: 100vw;
+    /* overflow-x: hidden; */
     position: absolute;
     top: 100%;
     left: 0;
   }
-} */
+}
+
+@media (orientation: portrait) and (min-width: 401px) and (max-width: 500px) {
+  html {
+    transform: rotate(-90deg) scale(0.56);
+    transform-origin: left top;
+    width: 100vh;
+    height: 100vw;
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+}

@@ -24,7 +24,7 @@ export default function ContextApp ({ children }) {
     const [ compShips, setCompShips ] = useState(null);
     const [ turn, setTurn ] = useState('begin'); //begin,player,comp
     const [ turnNum, setTurnNum ] = useState(0);
-    const [ lang, setLang ] = useState('ru');
+    const [ lang, setLang ] = useState(window.navigator.language.includes('ru') ? 'ru' : 'en');
     const [ timeMachine, setTimeMachine ] = useState(false);
 
     useEffect(() => {
@@ -34,6 +34,7 @@ export default function ContextApp ({ children }) {
             store.dispatch({ type: 'ADD_TURN', payload: turnInfo });
             // console.log ('after=',store.getState().map(el=>JSON.parse(el)))
         }
+        console.log(window.innerWidth);
     }, [turnNum])
     
     const [playHit] = useSound(mp3Hit);
@@ -91,7 +92,6 @@ export default function ContextApp ({ children }) {
         let elem = document.querySelector('.battlefield-pad').getBoundingClientRect();
         createShips();
         getBFcoord(elem);
-        
     }, [])
 
     useEffect(()=> {

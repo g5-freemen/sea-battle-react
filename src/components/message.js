@@ -13,8 +13,8 @@ export const message = {
         playerMissed: 'Вы промахнулись!',
         compHits: 'Компьютер попал!',
         compMissed: 'Компьютер промахнулся!',
-        winPlayer: 'Вы победили!'.toUpperCase(),
-        winComp: 'Компьютер победил!'.toUpperCase(),
+        winPlayer: 'Вы победили!',
+        winComp: 'Компьютер победил!',
     },
     en: {
         gameTitle: 'Sea Battle',
@@ -30,7 +30,7 @@ export const message = {
         playerMissed: 'Miss the target!',
         compHits: 'Computer Hit the target!',
         compMissed: 'Computer Miss the target!',
-        winPlayer: 'You Win!'.toUpperCase(),
-        winComp: 'Computer Win!'.toUpperCase(),
+        winPlayer: 'You Win!',
+        winComp: 'Computer Win!',
     }
 };

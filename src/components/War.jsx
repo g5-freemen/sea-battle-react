@@ -170,8 +170,8 @@ export default function War() {
             { turn === 'begin' && message[lang].begin }
             { turn === 'player' && message[lang].playerTurn }
             { turn.includes('comp') && message[lang].compTurn }
-            { turn === 'winComp' && message[lang].winComp }
-            { turn === 'winPlayer' && message[lang].winPlayer }
+            { turn === 'winComp' && message[lang].winComp.toUpperCase() }
+            { turn === 'winPlayer' && message[lang].winPlayer.toUpperCase() }
             &nbsp;
             { alarm === 'playerHits' && message[lang].playerHits }
             { alarm === 'playerMissed' && message[lang].playerMissed }
