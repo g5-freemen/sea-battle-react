@@ -1,14 +1,14 @@
-import './App.css';
-import ContextApp from './components/BattlefieldContext';
-import Battlefield from './components/Battlefield';
-import { createStore } from 'redux';
+import "./App.css";
+import ContextApp from "./components/BattlefieldContext";
+import Battlefield from "./components/Battlefield";
+import { createStore } from "redux";
 
 function timeMachine(state = [], action) {
-  if (action.type === 'ADD_TURN') {
+  if (action.type === "ADD_TURN") {
     return [...state, action.payload];
-  } else if (action.type ===  'TURN_BACK') {
-    return [...state].filter((el,idx) => idx<action.payload );
-  } 
+  } else if (action.type === "TURN_BACK") {
+    return [...state].filter((el, idx) => idx < action.payload);
+  }
   return [...state];
 }
 

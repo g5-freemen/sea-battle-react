@@ -1,24 +1,26 @@
-
 @font-face {
-	font-family: 'SegoePrint';
-	src: url('fonts/SegoePrint.woff') format('woff');
+  font-family: "SegoePrint";
+  src: url("fonts/SegoePrint.woff") format("woff");
 }
 
 body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   background: url("./img/grid.png") repeat;
 }
 
 .App {
   width: 100vw;
   height: 100vh;
-  font-family: 'SegoePrint';
+  font-family: "SegoePrint";
   -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none;   /* Chrome/Safari/Opera */
-  -khtml-user-select: none;    /* Konqueror */
-  -moz-user-select: none;      /* Firefox */
-  -ms-user-select: none; 
+  -webkit-user-select: none; /* Chrome/Safari/Opera */
+  -khtml-user-select: none; /* Konqueror */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none;
   user-select: none;
-  transition: all 1s ease;
+  transition: all 1s;
 }
 
 .wrap {
@@ -50,15 +52,15 @@ body {
   height: 3.3vmax;
   margin: 1rem auto 0 50rem;
   display: flex;
-  background: url('./img/lang_ru.png') no-repeat;
+  background: url("./img/lang_ru.png") no-repeat;
   background-size: contain;
   border: none;
   outline: none;
-  transition: all .3s;
+  transition: all 0.3s;
 }
 
 .lang-en {
-  background: url('./img/lang_en.png') no-repeat;
+  background: url("./img/lang_en.png") no-repeat;
   background-size: contain;
 }
 
@@ -85,16 +87,16 @@ body {
 .battlefield {
   display: grid;
   grid-template-areas:
-  ". d d d d d d d d d d"
-  "l c c c c c c c c c c"
-  "l c c c c c c c c c c"
-  "l c c c c c c c c c c"
-  "l c c c c c c c c c c"
-  "l c c c c c c c c c c"
-  "l c c c c c c c c c c"
-  "l c c c c c c c c c c"
-  "l c c c c c c c c c c"
-  "l c c c c c c c c c c";
+    ". d d d d d d d d d d"
+    "l c c c c c c c c c c"
+    "l c c c c c c c c c c"
+    "l c c c c c c c c c c"
+    "l c c c c c c c c c c"
+    "l c c c c c c c c c c"
+    "l c c c c c c c c c c"
+    "l c c c c c c c c c c"
+    "l c c c c c c c c c c"
+    "l c c c c c c c c c c";
   margin: 2px 65px 30px 33px;
   padding: 0;
   width: 368.5px;
@@ -170,7 +172,7 @@ body {
 
 .battlefield-menu--list li {
   width: fit-content;
-  transition: all .2s;
+  transition: all 0.2s;
 }
 
 .battlefield-menu--list li:hover,
@@ -187,23 +189,24 @@ body {
 }
 
 .ship {
-  margin-bottom: 33px;
+  margin: 0 33px 33px 0;
   display: flex;
   justify-content: center;
-  align-items: center;              
+  align-items: center;
   border: 3px solid blue;
   box-sizing: border-box;
   font-size: 14px;
-  background: repeating-linear-gradient(-45deg, #555 0, #555 2px, transparent 1px, transparent 5px);
+  background: repeating-linear-gradient(
+    -45deg,
+    #555 0,
+    #555 2px,
+    transparent 1px,
+    transparent 5px
+  );
 }
 
 .ship:hover {
   cursor: pointer;
-}
-
-.ship-margin {
-  width: 33px;
-  height: 66px;
 }
 
 .shipEl,
@@ -215,13 +218,19 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-size: .7rem;  
+  font-size: 0.7rem;
 }
 
 .shipEl,
 .hit {
   border: 2px solid blue;
-  background: repeating-linear-gradient(-45deg, #555 0, #555 2px, transparent 1px, transparent 5px);
+  background: repeating-linear-gradient(
+    -45deg,
+    #555 0,
+    #555 2px,
+    transparent 1px,
+    transparent 5px
+  );
 }
 
 .deadarea {
@@ -230,7 +239,13 @@ body {
 
 .hit {
   border: 2px solid red;
-  background: repeating-linear-gradient(-45deg, red 0, red 2px, transparent 1px, transparent 5px);
+  background: repeating-linear-gradient(
+    -45deg,
+    red 0,
+    red 2px,
+    transparent 1px,
+    transparent 5px
+  );
 }
 
 .time-machine--box {
@@ -248,7 +263,7 @@ body {
   font-size: 3rem;
   border: none;
   background: none;
-  transition: all .5s;
+  transition: all 0.5s;
   color: blue;
   outline: none;
 }
@@ -263,7 +278,7 @@ body {
   justify-content: center;
   align-items: center;
   width: 3vmax;
-  height: 3vmax;  
+  height: 3vmax;
   border: 3px solid blue;
   border-radius: 50%;
   font-weight: bold;
@@ -275,7 +290,7 @@ body {
 }
 
 .footer {
-  margin: 2rem auto .5rem;
+  margin: 2rem auto 0.5rem;
 }
 
 .footer__link {
@@ -297,8 +312,8 @@ body {
 }
 
 .darken {
-  background-color: #0093E9;
-  background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+  background-color: #0093e9;
+  background-image: linear-gradient(160deg, #0093e9 0%, #80d0c7 100%);
   opacity: 0;
 }
 
